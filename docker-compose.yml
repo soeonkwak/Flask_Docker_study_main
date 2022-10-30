@@ -5,11 +5,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'python main.py'
     ports:
       - 8001:5000 #Flask 기본 포드는 5000, 8000은 admin 프로젝트에서 장고한테 할당했으니까 여기는 8001로 설정
     volumes:
       - .:/app #로컬 프로젝트 파일(.)과 도커파일?이 서로 수정이 되어도 서로 반영이 됨.
     depends_on: #아래 DB 설정이 먼저 실행 --> services 실행
+      - db
+
+  #queue 컨테이너 생성, 똑같은 backend랑 똑같은 Dockerfile 사용
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python consumer.py' #원래는 매번 터미널 창에서 이 명령어 입력 하고 메세징 하던걸 걍 컨테이너로 올려서 저절로 실행되도록?
+    depends_on: #나중에 db에 데이터 넣을 거라 옵션 추가
       - db
 
   db:

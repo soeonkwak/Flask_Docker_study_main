@@ -6,5 +6,3 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 #모든 파일을 도커의 앱으로 copy하겠다.
 COPY . /app
-
-CMD python main.py
