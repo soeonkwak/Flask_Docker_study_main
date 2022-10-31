@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: 'python consumer.py' #원래는 매번 터미널 창에서 이 명령어 입력 하고 메세징 하던걸 걍 컨테이너로 올려서 저절로 실행되도록?
+    command: 'python -u consumer.py' #원래는 매번 터미널 창에서 이 명령어 입력 하고 메세징 하던걸 걍 컨테이너로 올려서 저절로 실행되도록?
     depends_on: #나중에 db에 데이터 넣을 거라 옵션 추가
       - db
 
